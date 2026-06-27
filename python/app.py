@@ -234,15 +234,15 @@ def get_weather():
                     # Cap PM2.5 and PM10 using ground-truth visibility to prevent model outliers
                     if visibility_km is not None:
                         if visibility_km >= 10.0:
-                            max_pm25, max_pm10 = 35.0, 75.0
+                            max_pm25, max_pm10 = 28.0, 65.0
                         elif visibility_km >= 8.0:
-                            max_pm25, max_pm10 = 50.0, 100.0
+                            max_pm25, max_pm10 = 40.0, 90.0
                         elif visibility_km >= 6.0:
-                            max_pm25, max_pm10 = 75.0, 150.0
+                            max_pm25, max_pm10 = 60.0, 130.0
                         elif visibility_km >= 4.0:
-                            max_pm25, max_pm10 = 115.0, 250.0
+                            max_pm25, max_pm10 = 90.0, 200.0
                         elif visibility_km >= 2.0:
-                            max_pm25, max_pm10 = 200.0, 350.0
+                            max_pm25, max_pm10 = 180.0, 300.0
                         else:
                             max_pm25, max_pm10 = 999.0, 999.0
 
