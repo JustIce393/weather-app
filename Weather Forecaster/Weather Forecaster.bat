@@ -1,4 +1,4 @@
 @echo off
 echo Starting SkyCast Weather Desktop App...
 echo.
-.\venv\bin\python.exe gui_app.py
+.\venv\bin\python.exe "Weather Forecaster.py"
