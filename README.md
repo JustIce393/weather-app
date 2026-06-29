@@ -83,15 +83,4 @@ weather-app/
     └── venv/                    <- Local Python virtual environment
 ```
 
----
 
-## 💡 SDE Interview Q&A
-
-### Q1: How did you ensure the GUI doesn't freeze when searching for a city?
-> API calls are synchronous blocking operations. If run directly inside the main UI thread, Tkinter would block on the socket read, causing the window to freeze, stop updating animations, and show as "Not Responding" to the OS. I resolved this by spawning all network calls (using `requests.get`) inside background threads using Python's `threading.Thread` or `ThreadPoolExecutor`. The main thread continues running the event loop smoothly, rendering a loading indicator, and updates the display once the background thread returns the data.
-
-### Q2: How does the "Locate Me" feature estimate coordinates without GPS hardware?
-> Since desktop machines lack GPS hardware, the app queries an IP geolocation API (`http://ip-api.com/json`). This API maps the user's public IP address to local ISP routing records and returns the approximate latitude, longitude, and city name. The app then parses this response and makes a follow-up call to the OpenWeatherMap API using the exact coordinates, returning hyper-local weather statistics.
-
-### Q3: Why did you implement an icon cache?
-> Weather icons are fetched dynamically from OpenWeatherMap servers. To avoid fetching the same image file repeatedly when toggling units or searching the same cities, I created a dictionary-based `icon_cache`. When an icon is requested, the code first checks this cache. If found, it displays the cached image, saving network bandwidth, reducing API traffic, and speeding up render times.
